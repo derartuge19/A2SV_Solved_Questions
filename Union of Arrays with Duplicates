@@ -1,0 +1,14 @@
+class Solution:    
+    def findUnion(self, a, b):
+        # code here
+        
+        union = []
+        seen = set()
+        
+        for i in a + b:
+            if i not in seen:
+                seen.add(i)
+                union.append(i)
+                
+        return union            
+            
