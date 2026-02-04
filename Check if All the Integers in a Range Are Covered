@@ -1,0 +1,23 @@
+class Solution(object):
+    def isCovered(self, ranges, left, right):
+        """
+        :type ranges: List[List[int]]
+        :type left: int
+        :type right: int
+        :rtype: bool
+        """
+        arr = [False] * (right - left + 1)
+
+        for start,end in ranges:
+            if end < left or start > right:
+                continue
+
+            myStart = max(start,left)  
+            myEnd =min(end,right)
+
+
+            for i in range(myStart ,myEnd + 1):
+                arr[i - left ] = True
+
+
+        return all(arr)
