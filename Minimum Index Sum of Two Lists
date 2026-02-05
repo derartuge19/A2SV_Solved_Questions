@@ -1,0 +1,45 @@
+class Solution(object):
+    def findRestaurant(self, list1, list2):
+        """
+        :type list1: List[str]
+        :type list2: List[str]
+        :rtype: List[str]
+        """
+        best = float('inf')
+        idx = {name: i for i,name in enumerate(list1)}
+        res = []
+
+        for j,name in enumerate(list2):
+            i = idx.get(name)
+            if  i is not None:
+                ch = i+ j
+                if ch < best:
+                    best = ch
+                    res = [name]
+                elif ch == best:
+                    res.append(name)
+        return res            
+     
+
+        # for i in range(len(list1)):
+        #     dictionary[list1[i]] = i
+
+        # sumOfIndex = float('inf')  
+        # res = []  
+
+        # for j in range(len(list2)):
+        #     ch = list2[j]
+        #     idx = dictionary.get(ch)
+        #     if i is None:
+        #         continue
+        #     total = i + j
+        #     if total < sumOfIndex:
+        #         sumOfIndex = total
+        #         res = [ch]
+        #     elif total == sumOfIndex:
+        #         res.append(ch)
+
+        # return res                   
+
+
+        
