@@ -1,0 +1,48 @@
+import collections
+
+class Solution(object):
+    def findDuplicate(self, paths):
+        """
+        :type paths: List[str]
+        :rtype: List[List[str]]
+        """
+        content_map = collections.defaultdict(list)
+        
+        for path_str in paths:
+            parts = path_str.split(' ')
+            directory = parts[0]
+            
+            for file_info in parts[1:]:
+                opening_paren = file_info.find('(')
+                name = file_info[:opening_paren]
+                content = file_info[opening_paren + 1:-1]
+                
+                full_path = directory + '/' + name
+                content_map[content].append(full_path)
+                
+        return [group for group in content_map.values() if len(group) > 1]
+
+
+        dictt = defaultdict(list)
+
+        for path in paths:
+            path = paths.split(" ")
+            folder = path[0]
+            for strr in path[1:]:
+                s = strr.split(".txt")
+                name = s[0]
+                content = s[1]
+                dictt[content].append((folder,name))
+
+            output = []
+            for k,v in dictt.items():
+                if len(v) > 1:
+                    tempo = []
+                    for path,name in v:
+                        tempo.append(path + '/'+name+'.txt')
+                    output.append(tempo)
+
+
+
+            return output            
+        
