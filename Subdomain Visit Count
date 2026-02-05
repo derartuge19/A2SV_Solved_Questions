@@ -1,0 +1,24 @@
+from collections import Counter
+
+class Solution(object):
+    def subdomainVisits(self, cpdomains):
+        """
+        :type cpdomains: List[str]
+        :rtype: List[str]
+        """
+
+        counts = Counter()
+
+        for entry in cpdomains:
+            count_str,domain = entry.split()
+
+            count = int(count_str)
+            parts = domain.split('.')
+
+            for i in range(len(parts)):
+                subdomain = '.'.join(parts[i:])
+
+                counts[subdomain] += count
+
+        return ["{} {}".format(v, k) for k, v in counts.items()]        
+        
