@@ -1,0 +1,28 @@
+from collections import Counter
+
+class Solution(object):
+    def findCommonResponse(self, responses):
+        """
+        :type responses: List[List[str]]
+        :rtype: str
+        """
+        global_counts = Counter()
+        
+        for day in responses:
+            unique_responses_today = set(day)
+            
+            for resp in unique_responses_today:
+                global_counts[resp] += 1
+      
+        best_word = ""
+        max_freq = -1
+        
+        for word, freq in global_counts.items():
+            if freq > max_freq:
+                max_freq = freq
+                best_word = word
+            elif freq == max_freq:
+                if word < best_word:
+                    best_word = word
+                    
+        return best_word
