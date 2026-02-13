@@ -1,0 +1,12 @@
+import sys
+ 
+def beautifulmatrix():
+    for r in range(1, 6):
+        row_data = list(map(int, sys.stdin.readline().split()))
+        for c in range(1, 6):
+            if row_data[c-1] == 1:
+                ans = abs(r - 3) + abs(c - 3)
+                print(ans)
+                return
+ 
+beautifulmatrix()
