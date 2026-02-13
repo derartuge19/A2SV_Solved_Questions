@@ -1,0 +1,23 @@
+class Solution(object):
+    def findDiagonalOrder(self, mat):
+        if not mat or not mat[0]:
+            return []
+        
+        m, n = len(mat), len(mat[0])
+        diagonals = {}
+        
+        for i in range(m):
+            for j in range(n):
+                s = i + j
+                if s not in diagonals:
+                    diagonals[s] = []
+                diagonals[s].append(mat[i][j])
+        
+        result = []
+        for s in range(m + n - 1):
+            if s % 2 == 0:
+                result.extend(diagonals[s][::-1])
+            else:
+                result.extend(diagonals[s])
+                
+        return result
