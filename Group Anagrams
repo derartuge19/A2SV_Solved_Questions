@@ -1,0 +1,18 @@
+from collections import defaultdict
+
+class Solution(object):
+    def groupAnagrams(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+
+        grps = defaultdict(list)
+
+        for ch in strs:
+            idx = ''.join(sorted(ch))
+            grps[idx].append(ch)
+
+
+        return list(grps.values())    
+        
