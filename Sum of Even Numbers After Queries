@@ -1,0 +1,19 @@
+class Solution(object):
+    def sumEvenAfterQueries(self, nums, queries):
+        res = []
+        current_even_sum = sum(x for x in nums if x % 2 == 0)
+        
+        for val, idx in queries:
+            old_val = nums[idx]
+            
+            if old_val % 2 == 0:
+                current_even_sum -= old_val
+            
+            nums[idx] += val
+            
+            if nums[idx] % 2 == 0:
+                current_even_sum += nums[idx]
+            
+            res.append(current_even_sum)
+                        
+        return res
