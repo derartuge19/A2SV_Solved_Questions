@@ -1,0 +1,33 @@
+def dominantChar():
+    test_str = input()
+    if not test_str:
+        return
+    test = int(test_str)
+    
+    for _ in range(test):
+        n = int(input())
+        s = input()
+        
+        result = -1
+        found = False
+        
+        for length in range(2, 8):
+            for i in range(n - length + 1):
+                substring = s[i : i + length]
+                
+                count_a = substring.count('a')
+                count_b = substring.count('b')
+                count_c = substring.count('c')
+                
+                if count_a > count_b and count_a > count_c:
+                    result = length
+                    found = True
+                    break 
+            
+            if found:
+                break 
+        
+        print(result)
+ 
+if __name__ == "__main__":
+    dominantChar()
