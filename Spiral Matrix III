@@ -1,0 +1,27 @@
+class Solution(object):
+    def spiralMatrixIII(self, rows, cols, rStart, cStart):
+        res = []
+        r, c = rStart, cStart
+        res.append([r, c])
+        
+        dx = [0, 1, 0, -1]
+        dy = [1, 0, -1, 0]
+        
+        step = 1
+        direction = 0
+        
+        while len(res) < rows * cols:
+            for _ in range(2):
+                for _ in range(step):
+                    r += dx[direction]
+                    c += dy[direction]
+                    
+                    if 0 <= r < rows and 0 <= c < cols:
+                        res.append([r, c])
+                        if len(res) == rows * cols:
+                            return res
+                
+                direction = (direction + 1) % 4
+            step += 1
+            
+        return res
