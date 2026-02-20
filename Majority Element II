@@ -6,13 +6,14 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        countOfFreq = Counter(nums)
-        res = []
         n = len(nums)
+        num_count = Counter(nums)
+        result = []
 
-        for i in countOfFreq:
-            if countOfFreq[i] > n / 3:
-                res.append(i)
+        for num in num_count:
+            if num_count[num] > (n // 3):
+                result.append(num)
 
-        return res         
-        
+        return result        
+
+      
