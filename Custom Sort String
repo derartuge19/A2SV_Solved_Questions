@@ -1,0 +1,25 @@
+class Solution(object):
+    def customSortString(self, order, s):
+        """
+        :type order: str
+        :type s: str
+        :rtype: str
+        """
+        counts = {}
+        for char in s:
+            if char in counts:
+                counts[char] += 1
+            else:
+                counts[char] = 1
+        
+        result = []
+        
+        for char in order:
+            if char in counts:
+                result.append(char * counts[char])
+                del counts[char]
+        
+        for char in counts:
+            result.append(char * counts[char])
+            
+        return "".join(result)
