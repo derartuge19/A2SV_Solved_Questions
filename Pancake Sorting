@@ -1,0 +1,22 @@
+class Solution(object):
+    def pancakeSort(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: List[int]
+        """
+        res = []
+        n = len(arr)
+        for value_to_sort in range(n, 1, -1):
+            idx = arr.index(value_to_sort)
+            
+            if idx == value_to_sort - 1:
+                continue
+            
+            if idx != 0:
+                res.append(idx + 1)
+                arr[:idx + 1] = arr[:idx + 1][::-1]
+          
+            res.append(value_to_sort)
+            arr[:value_to_sort] = arr[:value_to_sort][::-1]
+            
+        return res
