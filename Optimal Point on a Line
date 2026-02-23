@@ -1,0 +1,19 @@
+import sys
+ 
+def point():
+    input_data = sys.stdin.read().split()
+    if not input_data:
+        return
+    
+    n = int(input_data[0])
+    points = list(map(int, input_data[1:]))
+    
+    points.sort()
+    
+ 
+    ans_index = (n - 1) // 2
+  
+    print(points[ans_index])
+ 
+if __name__ == "__main__":
+    point()
