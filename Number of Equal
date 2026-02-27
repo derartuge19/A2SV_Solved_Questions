@@ -1,0 +1,29 @@
+n, m = map(int, input().split())
+arr1 = list(map(int, input().split()))
+arr2 = list(map(int, input().split()))
+
+i = 0  
+j = 0  
+total_pairs = 0
+
+while i < n and j < m:
+    if arr1[i] < arr2[j]:
+        i += 1
+    elif arr1[i] > arr2[j]:
+        j += 1
+    else:
+        current_val = arr1[i]
+        
+        count1 = 0
+        while i < n and arr1[i] == current_val:
+            count1 += 1
+            i += 1
+            
+        count2 = 0
+        while j < m and arr2[j] == current_val:
+            count2 += 1
+            j += 1
+            
+        total_pairs += (count1 * count2)
+
+print(total_pairs)
