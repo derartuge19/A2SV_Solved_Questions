@@ -1,0 +1,24 @@
+import sys
+ 
+input_data = sys.stdin.read().split()
+if not input_data:
+    exit()
+ 
+n = int(input_data[0])
+s = int(input_data[1])
+a = list(map(int, input_data[2:]))
+ 
+current_sum = 0
+ans = 0
+l = 0
+ 
+for r in range(n):
+    current_sum += a[r]
+    while current_sum >= s:
+       
+        current_sum -= a[l]
+        l += 1
+    
+    ans += l
+ 
+print(ans)
