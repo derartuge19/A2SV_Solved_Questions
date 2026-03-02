@@ -1,0 +1,33 @@
+t_str = input()
+if t_str:
+    t = int(t_str)
+    for _ in range(t):
+        n = int(input())
+        a = input()
+        b = input()
+    
+        balance = [0] * n
+        curr = 0
+        for i in range(n):
+            curr += 1 if a[i] == '1' else -1
+            balance[i] = curr
+            
+        possible = True
+        flipped = False
+       
+        for i in range(n - 1, -1, -1):
+            char_a = a[i]
+            if flipped:
+                char_a = '1' if a[i] == '0' else '0'
+            
+            if char_a != b[i]:
+                if balance[i] != 0:
+                    possible = False
+                    break
+                else:
+                    flipped = not flipped
+        
+        if possible:
+            print("YES")
+        else:
+            print("NO")
