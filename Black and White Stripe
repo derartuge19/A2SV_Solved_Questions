@@ -1,0 +1,29 @@
+t_str = input()
+if t_str:
+    t = int(t_str)
+    
+    for _ in range(t):
+        line1 = input().split()
+        if not line1:
+            continue
+        n, k = int(line1[0]), int(line1[1])
+        
+        s = input()
+        
+        current_white = 0
+        for i in range(k):
+            if s[i] == 'W':
+                current_white += 1
+        
+        min_white = current_white
+        
+        for i in range(k, n):
+            if s[i - k] == 'W':
+                current_white -= 1
+            if s[i] == 'W':
+                current_white += 1
+            
+            if current_white < min_white:
+                min_white = current_white
+        
+        print(min_white)
