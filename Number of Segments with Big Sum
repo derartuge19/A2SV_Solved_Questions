@@ -1,24 +1,23 @@
-import sys
- 
-input_data = sys.stdin.read().split()
-if not input_data:
-    exit()
- 
-n = int(input_data[0])
-s = int(input_data[1])
-a = list(map(int, input_data[2:]))
- 
-current_sum = 0
-ans = 0
-l = 0
- 
-for r in range(n):
-    current_sum += a[r]
-    while current_sum >= s:
-       
-        current_sum -= a[l]
+n , k = map(int, input().split())
+arr = list(map(int, input().split()))
+
+count = 0
+l = 0 
+r = 0
+curr_sum = 0 
+
+
+while r < n:
+    curr_sum += arr[r]
+    
+    while curr_sum >= k:
+        count += (n-r)
+        
+        curr_sum -= arr[l]
         l += 1
     
-    ans += l
- 
-print(ans)
+    r += 1    
+
+print(count)        
+    
+    
