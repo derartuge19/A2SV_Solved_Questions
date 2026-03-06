@@ -1,0 +1,38 @@
+"""
+4
+[6 -5 7 -3] -> [6 , 1 , 8 , 5] = 8
+3
+[2 3 -4]-> [2 , 5 , 1] = 5
+
+max prefix = 8 + 5 = 13
+"""
+t = int(input())
+
+for _ in range(t):
+    n = int(input())
+    arr1 = list(map(int, input().split()))
+    
+    max_arr1 = 0
+    curr_arr1 = 0
+    
+    for i in arr1:
+        curr_arr1 += i
+        if curr_arr1 > max_arr1:
+            max_arr1 = curr_arr1   # 8 
+                   
+           
+    m = int(input())
+    arr2 = list(map(int, input().split()))
+    
+    max_arr2 = 0
+    curr_arr2 = 0
+    
+    for i in arr2:
+        curr_arr2 += i
+        if curr_arr2 > max_arr2:
+            max_arr2 = curr_arr2    # 5
+           
+            
+            
+    print(max_arr1 + max_arr2)                    
+    
