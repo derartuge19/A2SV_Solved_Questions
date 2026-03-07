@@ -1,0 +1,20 @@
+line1 = input().split()
+n = int(line1[0])
+k = int(line1[1])
+
+a = [int(x) for x in input().split()]
+
+if k == n:
+    print(0)
+else:
+    diffs = []
+    for i in range(n - 1):
+        diffs.append(a[i + 1] - a[i])
+    
+    diffs.sort(reverse=True)
+    
+    total_cost = a[n - 1] - a[0]
+    for i in range(k - 1):
+        total_cost -= diffs[i]
+        
+    print(total_cost)
