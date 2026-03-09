@@ -1,0 +1,19 @@
+from collections import deque
+
+class RecentCounter(object):
+
+    def __init__(self):
+        # Initialize a double-ended queue to store request timestamps
+        self.requests = deque()
+
+    def ping(self, t):
+        """
+        :type t: int
+        :rtype: int
+        """
+        self.requests.append(t)
+        
+        while self.requests[0] < t - 3000:
+            self.requests.popleft()
+            
+        return len(self.requests)
