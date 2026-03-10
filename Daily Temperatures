@@ -1,0 +1,30 @@
+class Solution(object):
+    def dailyTemperatures(self, temperatures):
+        """
+        :type temperatures: List[int]
+        :rtype: List[int]
+        """
+        # [73,74,75,71,69,72,76,73]
+        # [0] * len(t) = res 
+        # [1,1,4,2,1,1,0,0]
+        # stk = [6]
+
+        res = [0] * len(temperatures)
+        stk = []
+
+        for i in range(len(temperatures)):
+            while stk and temperatures[i] > temperatures[stk[-1]]:
+                idx = stk.pop()
+                res[idx] = i - idx
+            stk.append(i)    
+
+        return res    
+
+
+
+            
+
+
+
+
+        
