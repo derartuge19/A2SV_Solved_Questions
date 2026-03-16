@@ -1,0 +1,48 @@
+class MyCircularDeque(object):
+
+    def __init__(self, k):
+        self.k = k
+        self.queue = [0] * k
+        self.size = 0
+        self.front = 0
+        self.rear = k - 1  # Start rear behind front
+
+    def insertFront(self, value):
+        if self.isFull(): return False
+        self.front = (self.front - 1) % self.k
+        self.queue[self.front] = value
+        self.size += 1
+        if self.size == 1: self.rear = self.front # First element case
+        return True
+
+    def insertLast(self, value):
+        if self.isFull(): return False
+        self.rear = (self.rear + 1) % self.k
+        self.queue[self.rear] = value
+        self.size += 1
+        if self.size == 1: self.front = self.rear # First element case
+        return True
+
+    def deleteFront(self):
+        if self.isEmpty(): return False
+        self.front = (self.front + 1) % self.k
+        self.size -= 1
+        return True
+
+    def deleteLast(self):
+        if self.isEmpty(): return False
+        self.rear = (self.rear - 1) % self.k
+        self.size -= 1
+        return True
+
+    def getFront(self):
+        return -1 if self.isEmpty() else self.queue[self.front]
+
+    def getRear(self):
+        return -1 if self.isEmpty() else self.queue[self.rear]
+
+    def isEmpty(self):
+        return self.size == 0
+
+    def isFull(self):
+        return self.size == self.k
