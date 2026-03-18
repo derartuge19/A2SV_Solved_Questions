@@ -1,0 +1,14 @@
+class Solution(object):
+    def numRabbits(self, answers):
+        from collections import Counter
+        import math
+        
+        counts = Counter(answers)
+        total = 0
+        
+        for x, count in counts.items():
+            group_size = x + 1
+            num_groups = int(math.ceil(float(count) / group_size))
+            total += num_groups * group_size
+            
+        return total
