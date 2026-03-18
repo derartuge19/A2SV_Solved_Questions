@@ -1,0 +1,22 @@
+class Solution(object):
+    def removeNodes(self, head):
+        def reverse(node):
+            prev = None
+            while node:
+                next_node = node.next
+                node.next = prev
+                prev = node
+                node = next_node
+            return prev
+
+        head = reverse(head)
+        
+        curr = head
+        while curr and curr.next:
+            if curr.next.val < curr.val:
+                curr.next = curr.next.next
+            else:
+                curr = curr.next
+        
+        return reverse(head)
+
