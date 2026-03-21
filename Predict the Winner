@@ -1,0 +1,19 @@
+class Solution(object):
+    def predictTheWinner(self, nums):
+        n = len(nums)
+        if n % 2 == 0:
+            return True
+            
+        memo = {}
+
+        def get_score(i, j):
+            if i == j:
+                return nums[i]
+            if (i, j) in memo:
+                return memo[(i, j)]
+            
+            res = max(nums[i] - get_score(i + 1, j), nums[j] - get_score(i, j - 1))
+            memo[(i, j)] = res
+            return res
+
+        return get_score(0, n - 1) >= 0
