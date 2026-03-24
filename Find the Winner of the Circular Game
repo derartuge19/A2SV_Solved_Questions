@@ -1,0 +1,14 @@
+class Solution(object):
+    def findTheWinner(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: int
+        """
+        winner_index = 0
+        
+        for i in range(2, n + 1):
+            winner_index = (winner_index + k) % i
+            
+        return winner_index + 1
+
