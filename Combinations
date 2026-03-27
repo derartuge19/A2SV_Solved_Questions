@@ -1,0 +1,15 @@
+class Solution(object):
+    def combine(self, n, k):
+        res = []
+        self.backtrack(1, n, k, [], res)
+        return res
+
+    def backtrack(self, start, n, k, path, res):
+        if len(path) == k:
+            res.append(list(path))
+            return
+        
+        for i in range(start, n - (k - len(path)) + 2):
+            path.append(i)
+            self.backtrack(i + 1, n, k, path, res)
+            path.pop()
