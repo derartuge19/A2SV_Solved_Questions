@@ -1,0 +1,30 @@
+class Solution(object):
+    def distributeCookies(self, cookies, k):
+        cookies.sort(reverse=True)
+        
+        children = [0] * k
+        self.result = float('inf')
+
+        def backtrack(cookie_idx):
+            if cookie_idx == len(cookies):
+                self.result = min(self.result, max(children))
+                return
+
+            if max(children) >= self.result:
+                return
+
+            for i in range(k):
+                if i > 0 and children[i] == children[i-1]:
+                    continue
+
+                children[i] += cookies[cookie_idx]
+                
+                backtrack(cookie_idx + 1)
+                
+                children[i] -= cookies[cookie_idx]
+
+                if children[i] == 0:
+                    break
+
+        backtrack(0)
+        return self.result
