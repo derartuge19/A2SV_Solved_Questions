@@ -1,0 +1,25 @@
+class Solution(object):
+    def letterCombinations(self, digits):
+        """
+        :type digits: str
+        :rtype: List[str]
+        """
+        if not digits:
+            return []
+        
+        phone_map = {
+            '2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl',
+            '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'
+        }
+        
+        # Start with an empty string in the list to kick off the combinations
+        res = [""]
+        
+        for digit in digits:
+            temp = []
+            for letter in phone_map[digit]:
+                for combination in res:
+                    temp.append(combination + letter)
+            res = temp
+            
+        return res
