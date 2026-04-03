@@ -1,0 +1,23 @@
+class Solution(object):
+    def shipWithinDays(self, weights, days):
+        left = max(weights)
+        right = sum(weights)
+        
+        while left < right:
+            mid = left + (right - left) // 2
+            
+            # Check if this capacity (mid) works
+            current_weight = 0
+            needed_days = 1
+            for w in weights:
+                if current_weight + w > mid:
+                    needed_days += 1
+                    current_weight = 0
+                current_weight += w
+            
+            if needed_days <= days:
+                right = mid
+            else:
+                left = mid + 1
+                
+        return left
