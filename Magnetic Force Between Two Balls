@@ -1,0 +1,36 @@
+class Solution(object):
+    def maxDistance(self, position, m):
+        """
+        :type position: List[int]
+        :type m: int
+        :rtype: int
+        """
+        position.sort()
+        
+        # Helper function to check if a minimum distance 'd' is possible
+        def can_place(d):
+            count = 1  # Place the first ball in the first basket
+            last_pos = position[0]
+            
+            for i in range(1, len(position)):
+                if position[i] - last_pos >= d:
+                    count += 1
+                    last_pos = position[i]
+                if count >= m:
+                    return True
+            return False
+
+        # Binary search for the maximum possible minimum distance
+        low = 1
+        high = (position[-1] - position[0]) // (m - 1)
+        res = 1
+        
+        while low <= high:
+            mid = (low + high) // 2
+            if can_place(mid):
+                res = mid
+                low = mid + 1
+            else:
+                high = mid - 1
+                
+        return res
