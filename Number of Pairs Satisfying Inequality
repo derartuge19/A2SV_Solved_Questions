@@ -6,26 +6,30 @@ class Solution(object):
         :type diff: int
         :rtype: int
         """
+        # Step 1: Simplify to a single array A
         a = [n1 - n2 for n1, n2 in zip(nums1, nums2)]
         self.count = 0
         
-        def merge_sort(lst):
-            if len(lst) <= 1:
-                return lst
+        def merge_sort(nums):
+            if len(nums) <= 1:
+                return nums
             
-            mid = len(lst) // 2
-            left = merge_sort(lst[:mid])
-            right = merge_sort(lst[mid:])
+            mid = len(nums) // 2
+            # Recursively split and solve
+            left = merge_sort(nums[:mid])
+            right = merge_sort(nums[mid:])
             
-            # Count valid pairs (i from left, j from right)
-            # A[i] <= A[j] + diff
-            j = 0
-            for i in range(len(left)):
-                while j < len(right) and left[i] <= right[j] + diff:
-                    j += 1
-                self.count += j
-            
-            # Standard merge step
+            # Step 2: Count valid pairs (i from left, j from right)
+            # Both left and right are already sorted at this stage
+            ptr = 0
+            for val_j in right:
+                # We need A[i] <= A[j] + diff
+                # Since 'left' is sorted, we can use a pointer to find all valid i
+                while ptr < len(left) and left[ptr] <= val_j + diff:
+                    ptr += 1
+                self.count += ptr
+                
+            # Step 3: Merge and return sorted array
             return sorted(left + right)
             
         merge_sort(a)
