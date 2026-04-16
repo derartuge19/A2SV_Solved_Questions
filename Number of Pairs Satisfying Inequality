@@ -1,0 +1,32 @@
+class Solution(object):
+    def numberOfPairs(self, nums1, nums2, diff):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :type diff: int
+        :rtype: int
+        """
+        a = [n1 - n2 for n1, n2 in zip(nums1, nums2)]
+        self.count = 0
+        
+        def merge_sort(lst):
+            if len(lst) <= 1:
+                return lst
+            
+            mid = len(lst) // 2
+            left = merge_sort(lst[:mid])
+            right = merge_sort(lst[mid:])
+            
+            # Count valid pairs (i from left, j from right)
+            # A[i] <= A[j] + diff
+            j = 0
+            for i in range(len(left)):
+                while j < len(right) and left[i] <= right[j] + diff:
+                    j += 1
+                self.count += j
+            
+            # Standard merge step
+            return sorted(left + right)
+            
+        merge_sort(a)
+        return self.count
