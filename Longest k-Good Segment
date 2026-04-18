@@ -1,0 +1,36 @@
+import sys
+
+input_data = sys.stdin.read().split()
+if input_data:
+    n = int(input_data[0])
+    k = int(input_data[1])
+    a = input_data[2:]
+
+    counts = {}
+    distinct = 0
+    left = 0
+    best_l = 0
+    best_r = 0
+    max_len = 0
+
+    for right in range(n):
+        val = a[right]
+        if counts.get(val, 0) == 0:
+            distinct += 1
+        counts[val] = counts.get(val, 0) + 1
+
+        while distinct > k:
+            out_val = a[left]
+            counts[out_val] -= 1
+            if counts[out_val] == 0:
+                distinct -= 1
+            left += 1
+        
+        current_len = right - left + 1
+        if current_len > max_len:
+            max_len = current_len
+            best_l = left + 1
+            best_r = right + 1
+
+    print(f"{best_l} {best_r}")
+
