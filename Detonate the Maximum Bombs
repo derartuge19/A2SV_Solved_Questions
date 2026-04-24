@@ -1,0 +1,31 @@
+class Solution(object):
+    def maximumDetonation(self, bombs):
+        n = len(bombs)
+        adj = [[] for _ in range(n)]
+        
+        for i in range(n):
+            xi, yi, ri = bombs[i]
+            for j in range(n):
+                if i == j: continue
+                xj, yj, rj = bombs[j]
+                # Distance formula: (x1-x2)^2 + (y1-y2)^2 <= r^2
+                if (xi - xj)**2 + (yi - yj)**2 <= ri**2:
+                    adj[i].append(j)
+        
+        def bfs(start_node):
+            queue = [start_node]
+            visited = {start_node}
+            while queue:
+                curr = queue.pop(0)
+                for neighbor in adj[curr]:
+                    if neighbor not in visited:
+                        visited.add(neighbor)
+                        queue.append(neighbor)
+            return len(visited)
+        
+        max_bombs = 0
+        for i in range(n):
+            max_bombs = max(max_bombs, bfs(i))
+            
+        return max_bombs
+
