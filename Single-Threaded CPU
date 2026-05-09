@@ -1,0 +1,25 @@
+import heapq
+
+class Solution(object):
+    def getOrder(self, tasks):
+        n = len(tasks)
+        sorted_tasks = sorted([(t[0], t[1], i) for i, t in enumerate(tasks)])
+        
+        res = []
+        pq = []
+        curr_time = 0
+        task_idx = 0
+        
+        while task_idx < n or pq:
+            if not pq and curr_time < sorted_tasks[task_idx][0]:
+                curr_time = sorted_tasks[task_idx][0]
+            
+            while task_idx < n and sorted_tasks[task_idx][0] <= curr_time:
+                heapq.heappush(pq, (sorted_tasks[task_idx][1], sorted_tasks[task_idx][2]))
+                task_idx += 1
+            
+            proc_time, original_idx = heapq.heappop(pq)
+            res.append(original_idx)
+            curr_time += proc_time
+            
+        return res
