@@ -1,0 +1,51 @@
+from collections import deque, defaultdict
+
+class Solution(object):
+    def sortItems(self, n, m, group, beforeItems):
+        group_id = m
+        for i in range(n):
+            if group[i] == -1:
+                group[i] = group_id
+                group_id += 1
+        
+        def topo_sort(nodes, edges, in_degree):
+            queue = deque([node for node in nodes if in_degree[node] == 0])
+            res = []
+            while queue:
+                u = queue.popleft()
+                res.append(u)
+                for v in edges[u]:
+                    in_degree[v] -= 1
+                    if in_degree[v] == 0:
+                        queue.append(v)
+            return res if len(res) == len(nodes) else []
+
+        item_edges = defaultdict(list)
+        item_degree = [0] * n
+        group_edges = defaultdict(list)
+        group_degree = [0] * group_id
+        group_to_items = defaultdict(list)
+        
+        for i in range(n):
+            group_to_items[group[i]].append(i)
+            for prev in beforeItems[i]:
+                if group[i] == group[prev]:
+                    item_edges[prev].append(i)
+                    item_degree[i] += 1
+                else:
+                    group_edges[group[prev]].append(group[i])
+                    group_degree[group[i]] += 1
+        
+        sorted_groups = topo_sort(range(group_id), group_edges, group_degree)
+        if not sorted_groups:
+            return []
+        
+        res = []
+        for g in sorted_groups:
+            items_in_group = group_to_items[g]
+            sorted_items = topo_sort(items_in_group, item_edges, item_degree)
+            if not sorted_items:
+                return []
+            res.extend(sorted_items)
+            
+        return res
