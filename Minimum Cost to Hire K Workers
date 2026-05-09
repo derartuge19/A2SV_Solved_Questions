@@ -1,0 +1,21 @@
+import heapq
+
+class Solution(object):
+    def mincostToHireWorkers(self, quality, wage, k):
+        workers = sorted((float(w) / q, q) for q, w in zip(quality, wage))
+        
+        res = float('inf')
+        max_heap = []
+        sum_q = 0
+        
+        for ratio, q in workers:
+            heapq.heappush(max_heap, -q)
+            sum_q += q
+            
+            if len(max_heap) > k:
+                sum_q += heapq.heappop(max_heap)
+            
+            if len(max_heap) == k:
+                res = min(res, ratio * sum_q)
+        
+        return res
