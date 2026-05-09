@@ -1,0 +1,21 @@
+class Solution(object):
+    def getHappyString(self, n, k):
+        res = []
+        
+        def backtrack(path):
+            if len(path) == n:
+                res.append("".join(path))
+                return
+            
+            if len(res) == k:
+                return
+
+            for char in ['a', 'b', 'c']:
+                if not path or path[-1] != char:
+                    path.append(char)
+                    backtrack(path)
+                    path.pop()
+                    
+        backtrack([])
+        
+        return res[k-1] if len(res) >= k else ""
