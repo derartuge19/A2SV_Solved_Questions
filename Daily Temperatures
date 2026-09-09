@@ -18,8 +18,7 @@ class Solution(object):
                 res[idx] = i - idx
             stk.append(i)    
 
-        return res    
-
+        return res
 
 
             
