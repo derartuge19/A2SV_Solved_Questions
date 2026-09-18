@@ -20,6 +20,6 @@ class Solution(object):
                 return False
 
             seen.add(n)
-        return True        
+        return True
 
         
